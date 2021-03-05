@@ -39,5 +39,4 @@ $conca2 = $conca1.ToCharArray()
 $restore = [Array]::Reverse($conca2) 
 $hereyougo = -join $conca2
 
-Write-Output
 Write-Host "Your password is $hereyougo" 
