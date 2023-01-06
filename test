@@ -24,7 +24,7 @@ function Set-TMServiceLogon {
         $option = New-CimSessionOption -Protocol Wsman
         $session = New-CimSession -ComputerName $computer -SessionOption $option
 
-        if ($PSBoundParameters.ContainsKey(('NewUser')) {
+        if ($PSBoundParameters.ContainsKey('NewUser')) {
             $args = @{'StartName'=$NewUser;'StartPassWord'=$NewPassword}
         }
         else {
@@ -32,13 +32,13 @@ function Set-TMServiceLogon {
         }
         # query data
         $params = @{'CimSession'=$session;'Query'="select * from Win32_process where name='$ServiceName'";
-                    'MethodName'='Change';'Arguments'=$args;}
+                    'MethodName'='Change';'Arguments'=$args}
         $ret = Invoke-CimMethod @params
 
         switch ($ret.ReturnValue) {
             0 { $status = "Success" }
-            22 {  $status = "Invalid Account"  }
-            Default { $status = "Failed: $($ret.ReturnValue)" }}
+            22 {  $status = "Invalid Account" }
+            Default { $status = "Failed: $($ret.ReturnValue)" }
         } 
 
         $props = @{'ComputerName'=$computer; 'Status'=$status}
@@ -51,4 +51,4 @@ function Set-TMServiceLogon {
 } #PROCESS
 
     END {}
-} #function
+}
