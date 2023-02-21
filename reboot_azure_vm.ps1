@@ -14,6 +14,8 @@ foreach ($data in $azure_data) {
 
     ForEach ($server in $server_List) {
         $job_progress = Restart-AzVM -ResourceGroupName $server.ResourceGroupName -Name $server.Name -AsJob
+        
+        #check the result and output VM name and reboot status to a text file
         while ($job_progress.State -eq "Running") {
         Start-Sleep 1
         } # while loop
