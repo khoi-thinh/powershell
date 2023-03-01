@@ -1,4 +1,5 @@
-<# Can import function to profile to make it available as cmdlet
+<# This function take in a list of hostname and return IPs (if hostname exists and can be resolved), otherwise it return Unknown. 
+Can import function to profile to make it available as cmdlet
 Run the below command and copy the function content into it
 notepad $profile 
 
