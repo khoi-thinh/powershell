@@ -1,4 +1,5 @@
 #Control script to trigger a local script file (check available disk storage) against multiple remore machines and output data object to a local CSV
+#Due to the dynamic column data (some machines might have C:, D: while some machines dont), we can pre-define the columns for CSV to prevent data missing
 
 $serverList = Get-Content "$env:USERPROFILE\serverlist.txt"
 $resultFile = "$env:USERPROFILE\check_result.csv"
