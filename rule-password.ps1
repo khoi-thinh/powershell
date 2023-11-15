@@ -1,4 +1,9 @@
-﻿try {
+#Scenario: Backup rule is to take snapshot monthly, the local user's password also rotate monthly automatically
+# If we roll back the snapshot (says previous month) without remembering local password, then we can not login
+# This script change the password of a specific local user based on the month, year along with some random string
+# We can revert the password with the input as servername, month, year
+ 
+try {
 $month = (Get-Date).Month
 $year = (Get-Date).Year
 $hostname = hostname
@@ -27,6 +32,7 @@ catch {
 Write-Output "Password change FAILED"
 }
 
+# Reverse password
 $ServerName = Read-Host -Prompt 'Input server name you need to retrieve password'
 $RotatedMonth = Read-Host -Prompt 'Input the month you rotate your password'
 $RotatedYear = Read-Host -Prompt 'Input the year you rotate your password'
