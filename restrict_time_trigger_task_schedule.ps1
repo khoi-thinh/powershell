@@ -9,6 +9,7 @@ $tomorrow_object = Get-Date $tomorrow -UFormat %Y-%m-%d
 
 $start_time = Read-Host "Enter time in format HH:mm (Hour:minute)"
 $start_time_object = Get-Date $start_time
+$min_start_time_object = Get-Date "02:05"
 
 $start_time = "$tomorrow_object $start_time"
 $start_time_trigger = New-ScheduledTaskTrigger -At $start_time -Once
@@ -17,7 +18,6 @@ if ($start_time -eq $null) {
     Write-Host "Invalid format. Try again!"
 }
 else {
-    $min_start_time_object = Get-Date "02:05"
     if ($start_time_object -lt $min_start_time_object) {
         Write-Host "Start time must be after 02:05 AM. Try again!"
     }
