@@ -12,7 +12,7 @@
 # $dataset = @"
 # serverName,ip,owner,os,role,status
 # JPWWSUS02,10.1.1.1,Khoi,Windows,Patching JP server,ON
-# JPWCIDDDV01,10.2.2.2,Jewel,Linux,CICD Server,OFF
+# JPWCIDDDV01,10.2.2.2,Ronaldo,Linux,CICD Server,OFF
 # "@
 
 # $inventory = $dataset | ConvertFrom-Csv | Select-Object serverName, ip, owner, os, role, status
