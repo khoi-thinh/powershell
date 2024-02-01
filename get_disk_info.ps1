@@ -2,7 +2,7 @@
 $currentDate = Get-Date -Format "yyyyMMdd"
 $serverList = Get-Content "C:\serverlist.txt"
 $resultFile = "C:\check_result_" + $currentDate + ".csv"
-$errorLogFile = "C:\errorLog.txt"
+$errorLogFile = "C:\errorLog_" + $currentDate + ".txt"
 
 # Save each disk result
 $outputHashTable = @()
