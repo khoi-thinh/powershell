@@ -1,7 +1,7 @@
 # Retrieve disk information (size, free space, usage rate) on multiple machines
-
+$currentDate = Get-Date -Format "yyyyMMdd"
 $serverList = Get-Content "C:\serverlist.txt"
-$resultFile = "C:\check_result.csv"
+$resultFile = "C:\check_result_" + $currentDate + ".csv"
 $errorLogFile = "C:\errorLog.txt"
 
 # Save each disk result
