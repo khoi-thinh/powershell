@@ -13,7 +13,7 @@ $service_password = ConvertTo-SecureString "password_here" -AsPlainText -Force
 $service_creds = New-Object System.Management.Automation.PSCredential -ArgumentList $service_user, $service_password
 $Skip = New-PSSessionOption -SkipCACheck -SkipCNCheck 
 
-# Define script block 
+# Define script block for scanning on all drives
 
 $script_block_drive = {
     $drive_path = ""
@@ -49,6 +49,8 @@ foreach ($servername in $server_list) {
 # Check the Digital Signature and output it along with server, Java path to a different csv file#
 
 $data = Import-Csv -Path $result_csv_file
+
+# Define script block for getting digital signature
 
 $script_block_signature = {
         $path_props = Get-ChildItem $using:javapath | Get-AuthenticodeSignature
