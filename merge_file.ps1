@@ -1,17 +1,27 @@
-# Define paths
-$outputFilePath = "C:\Users\thinh\OneDrive\Desktop\script_after.zip"  # Path to save the recombined file
-$inputFiles = @("C:\Users\thinh\OneDrive\Desktop\file_part1.zip", "C:\Users\thinh\OneDrive\Desktop\file_part2.zip")  # List of split files
+$part1 = "C:\path\to\split\files\yourfile.part1"
+$part2 = "C:\path\to\split\files\yourfile.part2"
+$mergedFile = "C:\path\to\merged\merged.zip"
 
-# Create the output file stream
-$outputStream = [System.IO.File]::Create($outputFilePath)
+# Open the target file for writing
+$fsMerged = [System.IO.File]::Create($mergedFile)
 
-# Combine the split files
-foreach ($file in $inputFiles) {
-    $inputStream = [System.IO.File]::OpenRead($file)
-    $inputStream.CopyTo($outputStream)
-    $inputStream.Close()
+# Read and write the first part
+$fsPart1 = [System.IO.File]::OpenRead($part1)
+$buffer = New-Object byte[] 64MB
+while (($bytesRead = $fsPart1.Read($buffer, 0, $buffer.Length)) -gt 0) {
+    $fsMerged.Write($buffer, 0, $bytesRead)
 }
+$fsPart1.Close()
 
-# Close the output stream
-$outputStream.Close()
-Write-Host "File recombined successfully."
+# Read and write the second part
+$fsPart2 = [System.IO.File]::OpenRead($part2)
+while (($bytesRead = $fsPart2.Read($buffer, 0, $buffer.Length)) -gt 0) {
+    $fsMerged.Write($buffer, 0, $bytesRead)
+}
+$fsPart2.Close()
+
+# Close the merged file stream
+$fsMerged.Close()
+
+Write-Output "Merge complete. File saved as $mergedFile"
+
